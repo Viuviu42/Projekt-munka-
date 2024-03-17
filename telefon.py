@@ -14,6 +14,7 @@ class Timedates:
 file = open("hivas.txt", "rt", encoding="utf-8")
 starttimedates = []
 endtimedates = []
+stat = {}
 
 for row in file:
     i = row.strip().split(" ")
@@ -21,4 +22,12 @@ for row in file:
     endtimedates.append(Timedates(i[3], i[4], i[5]))
 file.close()
 
+for i in starttimedates:
+    if i.h in stat.keys():
+        stat[i.h] += 1
+    else:
+        stat[i.h] = 1
 
+print("3. feladat")
+for k,v in stat.items():
+    print(f"{k} ora {v} hivas")

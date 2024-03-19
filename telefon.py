@@ -15,7 +15,9 @@ file = open("hivas.txt", "rt", encoding="utf-8")
 starttimedates = []
 endtimedates = []
 stat = {}
-bigest = count = bigcount = 0
+bigest = count = bigcount = talker = waiting = x = switch = 0
+start = int(8*60*60)
+end = int(12*60*60)
 
 for row in file:
     i = row.strip().split(" ")
@@ -33,12 +35,31 @@ print("3. feladat")
 for k,v in stat.items():
     print(f"{k} ora {v} hivas")
 
+while x < start:
+    x = input("\n5. feladat \nAdjon meg egy idopontot! (ora perc masodprec) ")
+    x = x.strip().split(" ")
+    x = int(x[0])*60*60 + int(x[1])*60 + int(x[2])
+
+
 for i in range(len(starttimedates)):
     count += 1
-    #print(starttimedates[i].masodperc(), end=" ")
-    #print(endtimedates[i].masodperc())
     if bigest < int(endtimedates[i].masodperc()) - int(starttimedates[i].masodperc()):
         bigest = int(endtimedates[i].masodperc()) - int(starttimedates[i].masodperc())
         bigcount = count
 
-print(f"4. feladat \nA leghosszabb ideig vonalban levo hivo {bigcount}. sorban szerepel, a hivas hossza: {bigest} masodperc.")
+    if x < starttimedates[i].masodperc() and switch == 0:
+        print(f"A varakozok szama: {waiting} a beszelo a {talker}. hivo")
+        switch = 1
+
+    if start < endtimedates[i].masodperc() and starttimedates[i].masodperc() < end:
+        start = endtimedates[i].masodperc()
+        talker = count
+        waiting = 0
+    else:
+        waiting += 1
+
+
+
+
+print(f"\n4. feladat \nA leghosszabb ideig vonalban levo hivo {bigcount}. sorban szerepel, a hivas hossza: {bigest} masodperc.")
+

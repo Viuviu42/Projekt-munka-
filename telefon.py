@@ -14,8 +14,9 @@ class Timedates:
 file = open("hivas.txt", "rt", encoding="utf-8")
 starttimedates = []
 endtimedates = []
+sixtask = []
 stat = {}
-bigest = count = bigcount = talker = waiting = x = switch = 0
+bigest = count = bigcount = talker = waiting = x = switch = counter = 0
 start = int(8*60*60)
 end = int(12*60*60)
 
@@ -55,6 +56,8 @@ for i in range(len(starttimedates)):
         start = endtimedates[i].masodperc()
         talker = count
         waiting = 0
+        sixtask.append(start)
+        counter = starttimedates[i].masodperc()
     else:
         waiting += 1
 
@@ -62,4 +65,4 @@ for i in range(len(starttimedates)):
 
 
 print(f"\n4. feladat \nA leghosszabb ideig vonalban levo hivo {bigcount}. sorban szerepel, a hivas hossza: {bigest} masodperc.")
-
+print(f"\n6. feladat \nAz utolso telefonalo adatai a(z) {talker}. sorban vannak, {sixtask[-2] - counter} masodpercig vart")

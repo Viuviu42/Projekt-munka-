@@ -5,13 +5,14 @@ class Timedates:
         self.h = int(h)
 
     def __str__(self):
-        return f"{self.sec} {self.min} {self.h}"
+        return f"{self.h} {self.min} {self.sec}"
 
     def masodperc(self):
         return self.h*60*60+self.min*60+self.sec
 
 
 file = open("hivas.txt", "rt", encoding="utf-8")
+infile = open("sikeres.txt", "wt", encoding="utf-8")
 starttimedates = []
 endtimedates = []
 sixtask = []
@@ -36,10 +37,14 @@ print("3. feladat")
 for k,v in stat.items():
     print(f"{k} ora {v} hivas")
 
-while x < start:
+while start > x:
     x = input("\n5. feladat \nAdjon meg egy idopontot! (ora perc masodprec) ")
     x = x.strip().split(" ")
-    x = int(x[0])*60*60 + int(x[1])*60 + int(x[2])
+    x = int(x[0]) * 60 * 60 + int(x[1]) * 60 + int(x[2])
+    while end < x:
+        x = input("\n5. feladat \nAdjon meg egy idopontot! (ora perc masodprec) ")
+        x = x.strip().split(" ")
+        x = int(x[0])*60*60 + int(x[1])*60 + int(x[2])
 
 
 for i in range(len(starttimedates)):
@@ -48,10 +53,10 @@ for i in range(len(starttimedates)):
         bigest = int(endtimedates[i].masodperc()) - int(starttimedates[i].masodperc())
         bigcount = count
 
-    if x < starttimedates[i].masodperc() and switch == 0 and x > endtimedates[i].masodperc():
+    if x < starttimedates[i].masodperc() and switch == 0 and x < endtimedates[i].masodperc():
         print(f"A varakozok szama: {waiting} a beszelo a {talker}. hivo")
         switch = 1
-    elif:
+
 
     if start < endtimedates[i].masodperc() and starttimedates[i].masodperc() < end:
         start = endtimedates[i].masodperc()
@@ -59,8 +64,13 @@ for i in range(len(starttimedates)):
         waiting = 0
         sixtask.append(start)
         counter = starttimedates[i].masodperc()
+        if start > starttimedates[i].masodperc():
+            infile.write(f"{talker} 8 0 0 {endtimedates[i]} \n")
+        else:
+            infile.write(f"{talker} {endtimedates[i-1]} {endtimedates[i]} \n")
     else:
         waiting += 1
+
 
 
 

@@ -48,9 +48,10 @@ for i in range(len(starttimedates)):
         bigest = int(endtimedates[i].masodperc()) - int(starttimedates[i].masodperc())
         bigcount = count
 
-    if x < starttimedates[i].masodperc() and switch == 0:
+    if x < starttimedates[i].masodperc() and switch == 0 and x > endtimedates[i].masodperc():
         print(f"A varakozok szama: {waiting} a beszelo a {talker}. hivo")
         switch = 1
+    elif:
 
     if start < endtimedates[i].masodperc() and starttimedates[i].masodperc() < end:
         start = endtimedates[i].masodperc()

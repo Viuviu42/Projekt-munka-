@@ -16,8 +16,9 @@ infile = open("sikeres.txt", "wt", encoding="utf-8")
 starttimedates = []
 endtimedates = []
 sixtask = []
+seven = []
 stat = {}
-bigest = count = bigcount = talker = waiting = x = switch = counter = 0
+bigest = count = bigcount = talker = waiting = x = switch = counter = switchtwo = 0
 start = int(8*60*60)
 end = int(12*60*60)
 
@@ -63,11 +64,13 @@ for i in range(len(starttimedates)):
         talker = count
         waiting = 0
         sixtask.append(start)
+        seven.append(endtimedates[i])
         counter = starttimedates[i].masodperc()
-        if start > starttimedates[i].masodperc():
+        if switchtwo == 0 :
             infile.write(f"{talker} 8 0 0 {endtimedates[i]} \n")
+            switchtwo = 1
         else:
-            infile.write(f"{talker} {endtimedates[i-1]} {endtimedates[i]} \n")
+            infile.write(f"{talker} {seven[-2]} {endtimedates[i]} \n")
     else:
         waiting += 1
 
